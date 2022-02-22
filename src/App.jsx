@@ -6,22 +6,21 @@ import Tasks from './components/tasks/Tasks';
 import AddTask from './components/addTask/AddTask';
 import Header from "./components/header/Header";
 import TaskDetails from './components/taskDetails/TaskDetails';
+import Api from './services/Api';
 
 import './App.css';
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Estudar Programação",
-      completed: false
-    },
-    {
-      id: 2,
-      title: "Ler livros",
-      completed: true
-    }
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+  async function getTasks() {
+    return await Api.get("/api/task")
+    .then((response) => setTasks(response.data))
+    .catch((err) => {
+      console.error("ops! ocorreu um erro" + err);
+    });
+  }
+  getTasks();
 
   const handleTaskClick = (taskId) => {
     const newTaks = tasks.map(task => {
