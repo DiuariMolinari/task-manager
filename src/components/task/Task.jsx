@@ -9,7 +9,7 @@ const Task = ({id, title, completed, handleTaskClick, handleTaskRemove}) => {
     const navigate = useNavigate ();
 
     const handleTaskDetailsClick = () => {
-        console.log("testee");
+        console.log("TaskDetailsClick");
         navigate(`/${title}`)
     }
    return(
